@@ -54,6 +54,23 @@ class LoginRequest extends FormRequest
         RateLimiter::clear($this->throttleKey());
     }
 
+    public function authenticate_company(): void
+    {
+        $this->ensureIsNotRateLimited();
+
+        $this->is('company/*') ? $guard = 'company' : $guard = 'web';
+
+        if (! Auth::guard($guard)->attempt($this->only('email', 'password'), $this->boolean('remember'))) {
+            RateLimiter::hit($this->throttleKey());
+
+            throw ValidationException::withMessages([
+                'email' => trans('auth.failed'),
+            ]);
+        }
+
+        RateLimiter::clear($this->throttleKey());
+    }
+
     /**
      * Ensure the login request is not rate limited.
      *

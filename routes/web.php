@@ -33,6 +33,8 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
+// admin
+
 Route::prefix('admin')->name('admin.')->group(function(){
     Route::get('/',function (){
         return view('admin.welcome');
@@ -48,5 +50,24 @@ Route::prefix('admin')->name('admin.')->group(function(){
     });
 
     require __DIR__.'/admin.php';
+});
+
+// company
+
+Route::prefix('company')->name('company.')->group(function(){
+    Route::get('/',function (){
+        return view('company.welcome');
+    });
+    Route::get('/dashboard', function () {
+        return view('company.dashboard');
+    })->middleware(['auth:company', 'verified'])->name('dashboard');
+
+    Route::middleware('auth:company')->group(function () {
+        Route::get('/profile', [ProfileOfCompanyController::class, 'edit'])->name('profile.edit');
+        Route::patch('/profile', [ProfileOfCompanyController::class, 'update'])->name('profile.update');
+        Route::delete('/profile', [ProfileOfCompanyController::class, 'destroy'])->name('profile.destroy');
+    });
+
+    require __DIR__.'/company.php';
 });
 
