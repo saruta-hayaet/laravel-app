@@ -11,6 +11,8 @@ use App\Http\Controllers\Admin\Auth\RegisteredUserController;
 use App\Http\Controllers\Admin\Auth\VerifyEmailController;
 
 use App\Http\Controllers\Admin\CompanyController;
+use App\Http\Controllers\Admin\FeatureController;
+use App\Http\Controllers\Admin\OfferController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest:admin')->group(function () {
@@ -58,6 +60,32 @@ Route::middleware('auth:admin')->group(function () {
 
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
                 ->name('logout');
+});
+
+Route::middleware('auth:admin')->group(function(){
+    Route::get('company', [CompanyController::class, 'index'])
+    ->name('company');
+    Route::get('company/{id}', [CompanyController::class, 'show'])
+    ->name('company.show');
+});
+
+Route::middleware('auth:admin')->group(function(){
+    Route::get('offer', [OfferController::class, 'index'])
+    ->name('offer');
+    Route::get('offer/{id}', [OfferController::class, 'show'])
+    ->name('offer.show');
+});
+
+Route::middleware('auth:admin')->group(function(){
+    Route::get('feature', [FeatureController::class, 'index'])
+    ->name('feature');
+    Route::get('feature/create', [FeatureController::class, 'create'])
+    ->name('feature.create');
+    Route::post('feature/store', [FeatureController::class, 'store'])
+    ->name('feature.store');
+
+    // Route::get('feature/{id}', [CompanyController::class, 'show'])
+    // ->name('feature.show');
 });
 
 

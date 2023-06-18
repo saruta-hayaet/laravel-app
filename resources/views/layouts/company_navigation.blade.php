@@ -15,6 +15,9 @@
                     <x-nav-link :href="route('company.dashboard')" :active="request()->routeIs('company.dashboard')">
                         {{ __('ダッシュボード') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('company.offer')" :active="request()->routeIs('company.offer')">
+                        求人管理
+                    </x-nav-link>
                 </div>
             </div>
 

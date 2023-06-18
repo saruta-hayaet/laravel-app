@@ -11,6 +11,7 @@ use App\Http\Controllers\Company\Auth\RegisteredUserController;
 use App\Http\Controllers\Company\Auth\VerifyEmailController;
 
 use App\Http\Controllers\Company\CompanyController;
+use App\Http\Controllers\Company\OfferController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest:company')->group(function () {
@@ -58,4 +59,13 @@ Route::middleware('auth:company')->group(function () {
 
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
                 ->name('logout');
+});
+
+Route::middleware('auth:company')->group(function() {
+    Route::get('offer', [OfferController::class, 'index'])
+    ->name('offer');
+    Route::get('offer/create', [OfferController::class, 'create'])
+    ->name('offer.create');
+    Route::post('offer/store', [OfferController::class, 'store'])
+    ->name('offer.store');
 });

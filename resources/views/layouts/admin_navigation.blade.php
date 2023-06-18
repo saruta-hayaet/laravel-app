@@ -15,6 +15,15 @@
                     <x-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.dashboard')">
                         {{ __('ダッシュボード') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('admin.company')" :active="request()->routeIs('admin.company')">
+                        {{ __('企業') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('admin.offer')" :active="request()->routeIs('admin.offer')">
+                        {{ __('求人') }}
+                    </x-nav-link>
+                    <x-nav-link :href="route('admin.feature')" :active="request()->routeIs('admin.feature')">
+                        {{ __('特徴') }}
+                    </x-nav-link>
                 </div>
             </div>
 

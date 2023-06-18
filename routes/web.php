@@ -1,9 +1,9 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Admin\CompanyController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController as ProfileOfAdminController;
-use App\Http\Controllers\Admin\CompanyController;
 
 /*
 |--------------------------------------------------------------------------
@@ -70,4 +70,5 @@ Route::prefix('company')->name('company.')->group(function(){
 
     require __DIR__.'/company.php';
 });
+
 
